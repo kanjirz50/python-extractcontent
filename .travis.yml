@@ -1,0 +1,6 @@
+language: python
+pytyhon:
+  - "3.6"
+  - "nightly"
+script:
+  - pytest
