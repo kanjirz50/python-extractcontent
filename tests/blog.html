@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://kanji.hatenablog.jp/entry/python-xonsh-try -->
+<html lang="ja" data-admin-domain="//blog.hatena.ne.jp" data-author="kanjirz50" data-avail-langs="ja en" data-blog="kanji.hatenablog.jp" data-blog-host="kanji.hatenablog.jp" data-blog-is-public="1" data-blog-name="かんちゃんの備忘録" data-blog-owner="kanjirz50" data-blog-uri="http://kanji.hatenablog.jp/" data-blog-uuid="10328749687186964311" data-blogs-uri-base="http://kanji.hatenablog.jp" data-brand="hatenablog" data-data-layer="{&quot;hatenablog&quot;:{&quot;admin&quot;:{},&quot;pro&quot;:&quot;free&quot;,&quot;page_id&quot;:&quot;entry&quot;,&quot;blog&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;disable_ads&quot;:&quot;&quot;,&quot;enable_ads&quot;:&quot;true&quot;,&quot;name&quot;:&quot;\u304b\u3093\u3061\u3083\u3093\u306e\u5099\u5fd8\u9332&quot;,&quot;is_public&quot;:&quot;true&quot;,&quot;uri&quot;:&quot;http://kanji.hatenablog.jp/&quot;,&quot;is_sleeping&quot;:&quot;false&quot;,&quot;force_pc_view&quot;:&quot;false&quot;,&quot;entry_show_footer_related_entries&quot;:&quot;true&quot;,&quot;is_responsive_view&quot;:&quot;false&quot;,&quot;content_seems_japanese&quot;:&quot;true&quot;,&quot;enable_keyword_link&quot;:&quot;true&quot;,&quot;owner_name&quot;:&quot;kanjirz50&quot;},&quot;brand&quot;:&quot;hatenablog&quot;,&quot;analytics&quot;:{&quot;property_id&quot;:&quot;UA-84894610-3&quot;,&quot;non_sampling_property_id&quot;:&quot;&quot;,&quot;brand_property_id&quot;:&quot;&quot;,&quot;separated_property_id&quot;:&quot;UA-29716941-24&quot;},&quot;brand_tracking_category&quot;:&quot;hatenablog&quot;,&quot;permalink_entry&quot;:{&quot;hour&quot;:&quot;0&quot;,&quot;author_name&quot;:&quot;kanjirz50&quot;,&quot;date&quot;:&quot;2017-12-13&quot;,&quot;categories&quot;:&quot;&quot;,&quot;title&quot;:&quot;Xonsh\u3092\u4f7f\u3063\u3066\u307f\u305f&quot;,&quot;uri&quot;:&quot;http://kanji.hatenablog.jp/entry/python-xonsh-try&quot;},&quot;router_type&quot;:&quot;blogs&quot;}}" data-device="pc" data-dont-recommend-pro="false" data-globalheader-color="b" data-globalheader-type="pc" data-has-touch-view="1" data-page="entry" data-plus-available="" data-pro="false" data-router-type="blogs" data-static-domain="https://cdn.blog.st-hatena.com" data-version="b52004788defb2dcbf07a5cc7c17e1d8" itemscope="" itemtype="http://schema.org/Article" data-initial-state="{}"><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./blog_files/1733466696949178" async=""></script><script async="" src="./blog_files/fbevents.js.ダウンロード"></script><script async="" src="./blog_files/uwt.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/segmentation.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/pageviews"></script><script type="text/javascript" async="" src="./blog_files/segment"></script><script async="" src="./blog_files/tdim-0.11.2.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/conversion_async.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/conversion_async.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/conversion_async.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/conversion_async.js.ダウンロード"></script><script async="" src="./blog_files/gtm.js.ダウンロード"></script><script src="./blog_files/osd.js.ダウンロード"></script><script src="./blog_files/pubads_impl_rendering_177.js.ダウンロード"></script><script src="./blog_files/ads"></script><script type="text/javascript" src="./blog_files/us" async="" defer=""></script><script async="" type="text/javascript" src="./blog_files/dfp.config.json"></script><script type="text/javascript" async="" src="./blog_files/td.min.js.ダウンロード"></script><script type="text/javascript" async="" src="./blog_files/recaptcha__ja.js.ダウンロード"></script>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  
+
+
+
+  
+
+
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=7; IE=9; IE=10; IE=11">
+  <title>Xonshを使ってみた - かんちゃんの備忘録</title>
+
+  
+  <link rel="canonical" href="http://kanji.hatenablog.jp/entry/python-xonsh-try">
+
+
+
+  
+  
+
+<meta itemprop="name" content="Xonshを使ってみた - かんちゃんの備忘録">
+
+  <meta itemprop="image" content="https://cdn.blog.st-hatena.com/images/theme/og-image-1500.png">
+
+
+  <meta property="og:title" content="Xonshを使ってみた - かんちゃんの備忘録">
+<meta property="og:type" content="article">
+  <meta property="og:url" content="http://kanji.hatenablog.jp/entry/python-xonsh-try">
+
+  
+  
+  
+  <meta property="og:image" content="https://cdn.blog.st-hatena.com/images/theme/og-image-1500.png">
+
+    <meta property="og:description" content="【Xonsh Advent Calendar 2017の13日目の記事です。】 Xonshがいいという話を聞いて、これは使ってみないと！と思い使ってみました。 今良いんですよXonshが https://t.co/zSU1i0yxPo— ばんくし (@vaaaaanquish) 2017年11月24日 その備忘録です。">
+<meta property="og:site_name" content="かんちゃんの備忘録">
+
+  <meta property="article:published_time" content="1513090800">
+
+      <meta name="twitter:card" content="summary">  <meta name="twitter:title" content="Xonshを使ってみた - かんちゃんの備忘録">    <meta name="twitter:description" content="【Xonsh Advent Calendar 2017の13日目の記事です。】 Xonshがいいという話を聞いて、これは使ってみないと！と思い使ってみました。 今良いんですよXonshが https://t.co/zSU1i0yxPo— ばんくし (@vaaaaanquish) 2017年11月24日 その備忘録です。">  <meta name="twitter:app:name:iphone" content="はてなブログアプリ">
+  <meta name="twitter:app:id:iphone" content="583299321">
+  <meta name="twitter:app:url:iphone" content="hatenablog:///open?uri=http%3A%2F%2Fkanji.hatenablog.jp%2Fentry%2Fpython-xonsh-try">  <meta name="twitter:site" content="@kanji250tr">
+  
+    <meta name="description" content="【Xonsh Advent Calendar 2017の13日目の記事です。】 Xonshがいいという話を聞いて、これは使ってみないと！と思い使ってみました。 今良いんですよXonshが https://t.co/zSU1i0yxPo— ばんくし (@vaaaaanquish) 2017年11月24日 その備忘録です。">
+
+  
+<script async="" type="text/javascript" src="./blog_files/us0"></script><script async="" type="text/javascript" src="./blog_files/td_htn_access.js.ダウンロード"></script><script async="" type="text/javascript" src="./blog_files/hatena_bigmining.js.ダウンロード"></script><script async="" type="text/javascript" src="./blog_files/user.segment.json"></script><script id="facebook-jssdk" src="./blog_files/sdk.js.ダウンロード"></script><script async="" type="text/javascript" src="./blog_files/gpt.js.ダウンロード"></script><script async="" type="text/javascript" src="./blog_files/audience"></script><script async="" src="./blog_files/apstag.js.ダウンロード"></script><script async="" type="text/javascript" src="./blog_files/jstag"></script><script type="text/javascript" async="" src="./blog_files/analytics.js.ダウンロード"></script><script async="" src="./blog_files/gtm.js(1).ダウンロード"></script><script id="embed-gtm-data-layer-loader" data-data-layer-page-specific="{&quot;hatenablog&quot;:{&quot;blogs_permalink&quot;:{&quot;is_blog_sleeping&quot;:&quot;false&quot;,&quot;blog_hide_afc_func&quot;:&quot;false&quot;,&quot;has_related_entries_with_elasticsearch&quot;:&quot;true&quot;,&quot;is_author_pro&quot;:&quot;false&quot;,&quot;blog_struct_hide_afc&quot;:&quot;false&quot;,&quot;blog_afc_issued&quot;:&quot;false&quot;,&quot;brand_hide_afc&quot;:&quot;false&quot;,&quot;entry_afc_issued&quot;:&quot;false&quot;,&quot;blog_hide_afc_field&quot;:&quot;false&quot;}}}">
+(function() {
+  function loadDataLayer(elem, attrName) {
+    if (!elem) { return {}; }
+    var json = elem.getAttribute(attrName);
+    if (!json) { return {}; }
+    return JSON.parse(json);
+  }
+
+  var globalVariables = loadDataLayer(
+    document.documentElement,
+    'data-data-layer'
+  );
+  var pageSpecificVariables = loadDataLayer(
+    document.getElementById('embed-gtm-data-layer-loader'),
+    'data-data-layer-page-specific'
+  );
+
+  var variables = [globalVariables, pageSpecificVariables];
+
+  if (!window.dataLayer) {
+    window.dataLayer = [];
+  }
+
+  for (var i = 0; i < variables.length; i++) {
+    window.dataLayer.push(variables[i]);
+  }
+})();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4CXTW');</script>
+<!-- End Google Tag Manager -->
+
+
+
+
+
+  <link rel="shortcut icon" href="https://cdn.image.st-hatena.com/image/favicon/4f23891aec1d7abeaf50a63cf8ddbb362f3b72fc/version=1/https%3A%2F%2Fcdn.user.blog.st-hatena.com%2Fcustom_blog_icon%2F125871161%2F1514187551722936">
+<link rel="icon" sizes="192x192" href="https://cdn.image.st-hatena.com/image/square/2e298f76002d94f9aca8ec019d02f87e89b32def/backend=imagemagick;height=192;version=1;width=192/https%3A%2F%2Fcdn.user.blog.st-hatena.com%2Fcustom_blog_icon%2F125871161%2F1514187551722936">
+
+  
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://kanji.hatenablog.jp/feed">
+<link rel="alternate" type="application/rss+xml" title="RSS2.0" href="http://kanji.hatenablog.jp/rss">
+<link rel="alternate" type="application/json+oembed" href="http://hatenablog.com/oembed?url=http%3A%2F%2Fkanji.hatenablog.jp%2Fentry%2Fpython-xonsh-try&amp;format=json" title="oEmbed Profile of Xonshを使ってみた">
+<link rel="alternate" type="text/xml+oembed" href="http://hatenablog.com/oembed?url=http%3A%2F%2Fkanji.hatenablog.jp%2Fentry%2Fpython-xonsh-try&amp;format=xml" title="oEmbed Profile of Xonshを使ってみた">
+  
+  <link rel="author" href="http://www.hatena.ne.jp/kanjirz50/">
+
+
+  
+    <link rel="stylesheet" type="text/css" href="./blog_files/blog.css">
+
+    
+  <link rel="stylesheet" type="text/css" href="./blog_files/dc6b706a8274b06f4b0e52865bf98baa1d886e43">
+  
+
+  
+
+  
+<script> </script>
+
+  
+<style>
+  div#google_afc_user,
+  div.google-afc-user-container,
+  div.google_afc_image,
+  div.google_afc_blocklink {
+      display: block !important;
+  }
+</style>
+
+
+  
+<script type="text/javascript" charset="utf-8" async="" src="./blog_files/button.df1da1fef194d8f8f3fd803a219a8177.js.ダウンロード"></script><script type="text/javascript" charset="utf-8" async="" src="./blog_files/tweet.05b3387999ca4bf3e9bd50ecbb81d2b3.js.ダウンロード"></script><link rel="preload" href="./blog_files/integrator.js.ダウンロード" as="script"><script type="text/javascript" src="./blog_files/integrator.js.ダウンロード"></script><link rel="preload" href="./blog_files/integrator.js(1).ダウンロード" as="script"><script type="text/javascript" src="./blog_files/integrator.js(1).ダウンロード"></script><script src="./blog_files/pubads_impl_177.js.ダウンロード" async=""></script><script src="./blog_files/entries.json" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, "hiragino kaku gothic pro",meiryo,"ms pgothic",sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}.fb_mobile_overlay_active{height:100%;overflow:hidden;position:fixed;width:100%}.fb_shrink_active{opacity:1;transform:scale(1, 1);transition-duration:200ms;transition-timing-function:ease-out}.fb_shrink_active:active{opacity:.5;transform:scale(.75, .75)}</style><script src="./blog_files/saved_resource"></script><script src="./blog_files/saved_resource(1)"></script><script src="./blog_files/saved_resource(2)"></script><script src="./blog_files/saved_resource(3)"></script></head>
+
+  <body class="page-entry">
+    
+    <div id="header-container">
+     <div id="sp-suggest" style="display: none;"><a id="sp-suggest-link" href="http://kanji.hatenablog.jp/entry/python-xonsh-try#">スマートフォン用の表示で見る</a></div>
+    </div>
+
+    <div id="globalheader-container" data-brand="hatenablog">
+  <iframe id="globalheader" height="37" frameborder="0" allowtransparency="true" src="./blog_files/saved_resource.html"></iframe>
+</div>
+
+
+    <div id="container">
+      <div id="container-inner">
+        <header id="blog-title" data-brand="hatenablog">
+  <div id="blog-title-inner">
+    <div id="blog-title-content">
+      <h1 id="title"><a href="http://kanji.hatenablog.jp/">かんちゃんの備忘録</a></h1>
+      
+        <h2 id="blog-description">プログラミングや言語処理、ガジェットなど個人の備忘録です。（メモ書き＋α）</h2>
+      
+    </div>
+  </div>
+</header>
+
+        
+
+        
+        
+
+
+
+
+<div id="content" class="hfeed">
+  <div id="content-inner">
+    <div id="wrapper">
+      <div id="main">
+        <div id="main-inner">
+          
+
+
+          
+  
+  <!-- google_ad_section_start -->
+  <!-- rakuten_ad_target_begin -->
+  
+  
+  
+
+  
+
+  
+    
+      
+        <article class="entry hentry js-entry-article date-first autopagerize_page_element chars-200 words-100 mode-markdown entry-odd" id="entry-8599973812321690844" data-keyword-campaign="" data-uuid="8599973812321690844" data-publication-type="entry">
+  <div class="entry-inner">
+    <header class="entry-header">
+    <div class="date entry-date first">
+    <a href="http://kanji.hatenablog.jp/archive/2017/12/13" rel="nofollow">
+      <time pubdate="" datetime="2017-12-12T15:00:00Z" title="2017-12-12T15:00:00Z">
+        <span class="date-year">2017</span><span class="hyphen">-</span><span class="date-month">12</span><span class="hyphen">-</span><span class="date-day">13</span>
+      </time>
+    </a>
+  </div>
+  <h1 class="entry-title">
+  <a href="http://kanji.hatenablog.jp/entry/python-xonsh-try" class="entry-title-link bookmark">Xonshを使ってみた</a>
+</h1>
+
+  
+  
+
+
+  
+
+  
+
+<div class="entry-header-menu"><a href="javascript:void">編集</a></div></header>
+
+    
+
+    <div class="entry-content">
+  
+    <p><a href="https://qiita.com/advent-calendar/2017/xonsh">【Xonsh Advent Calendar 2017の13日目の記事です。】</a></p>
+
+<p>Xonshがいいという話を聞いて、これは使ってみないと！と思い使ってみました。</p>
+
+<twitterwidget class="twitter-tweet twitter-tweet-rendered" id="twitter-widget-2" style="position: static; visibility: visible; display: block; transform: rotate(0deg); max-width: 100%; width: 500px; min-width: 220px; margin-top: 10px; margin-bottom: 10px;" data-tweet-id="934045710348984323"></twitterwidget>
+
+
+<script async="" src="./blog_files/widgets.js.ダウンロード" charset="utf-8"></script>
+
+
+<p>その備忘録です。</p>
+
+<ul class="table-of-contents">
+    <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#Xonsh%E3%81%A8%E3%81%AF">Xonshとは</a></li>
+    <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#%E5%B0%8E%E5%85%A5">導入</a></li>
+    <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F">使ってみた</a><ul>
+            <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0">環境変数</a></li>
+            <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#Python-mode%E3%81%A8Subprocess-mode">Python-modeとSubprocess-mode</a></li>
+            <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#Subprocess%E3%81%A8%E3%81%97%E3%81%A6">Subprocessとして</a></li>
+        </ul>
+    </li>
+    <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E7%BD%AE%E6%8F%9B%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84">プロセス置換ができない？</a></li>
+    <li><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%A6%E6%84%9F%E6%83%B3">使ってみて感想</a></li>
+</ul>
+
+<h2 id="Xonshとは">Xonshとは</h2>
+
+<blockquote><p>the xonsh shell</p>
+
+<p>~ こちらトム少佐からXonsh地上管制へ ~</p>
+
+<p>Xonshは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>により動作する、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>で<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>のようなシェル言語である<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%D7%A5%ED%A5%F3%A5%D7%A5%C8">コマンドプロンプト</a>です。
+この言語は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a> 3.4+の上位互換で、慣れ親しんだ<a class="keyword" href="http://d.hatena.ne.jp/keyword/Bash">Bash</a>やIPythonなどの基本的なシェル命令を追加したものです。
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>やMac OSX、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Windows">Windows</a>といったメジャーなシステム上で動作します。
+Xonshは、普段使いで上級者も初級者も同じように使えるように作られています。</p></blockquote>
+
+<p>勢いで<a href="http://xon.sh/">xonshトップページ</a>の冒頭を訳してみましたが、<code>This is major Tom to ground xonshtrol</code>は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D3%A5%C3%A5%C9%A1%A6%A5%DC%A5%A6%A5%A4">デビッド・ボウイ</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DA%A5%A4%A5%B9%A1%A6%A5%AA%A5%C7%A5%A3%A5%C6%A5%A3">スペイス・オディティ</a>の<code>This is major Tom to ground control</code>をもじっているようで、英語力のない自分には理解しがたいです（汗）</p>
+
+<p>とにかく冒頭からは、<strong><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>で作られた良い感じのシェルだ</strong>ということが分かったので使ってみます。</p>
+
+<h2 id="導入">導入</h2>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a> 3.4以上の環境を用意して、<code>pip install xonsh</code>でインストールできます。</p>
+
+<p>ログインシェルにする場合は、システムに<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a> 3.4以上をインストールしておくと安心かと思います。</p>
+
+<h2 id="使ってみた">使ってみた</h2>
+
+<p><a href="http://xon.sh/tutorial.html">Tutorial</a>見ながら使ってみて、普段使っている<a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a>とは異なる機能や文法に触れました。
+（ノリで記事を書いてみたら、<a href="http://vaaaaaanquish.hatenablog.com/entry/2017/11/30/175236">ばんくしさんの1日目の記事</a>と結構<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%AB%A4%D6">かぶ</a>ってしまいました(<em> </em>)）</p>
+
+<h3 id="環境変数"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B4%C4%B6%AD%CA%D1%BF%F4">環境変数</a></h3>
+
+<p><code>$</code>+変数名が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B4%C4%B6%AD%CA%D1%BF%F4">環境変数</a>となります。また代入は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>と同じように記述します。</p>
+
+<pre class="code lang-python" data-lang="python" data-unlink="">username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ $HOST
+<span class="synConstant">'hostname'</span>
+username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ $HOST = <span class="synConstant">"hogefuga"</span>
+username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ $HOST
+<span class="synConstant">'hogefuga'</span>
+</pre>
+
+
+<p>xonsh<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>から参照したいときは、<code>${}</code>構文を使うことで文字列で参照できます。</p>
+
+<pre class="code lang-python" data-lang="python" data-unlink="">username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ ${<span class="synConstant">"HOME"</span>}
+<span class="synConstant">"/home/username"</span>
+</pre>
+
+
+<h3 id="Python-modeとSubprocess-mode"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>-modeとSubprocess-mode</h3>
+
+<p>xonshを使っていると、まるでIPythonのような使い勝手で<a class="keyword" href="http://d.hatena.ne.jp/keyword/bash">bash</a> likeな<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>というように思えてきます。
+両方の文法が使えるのですが、混在すると曖昧となるため、コマンドと同名の変数名やメソッド名は避けましょうというお話です。</p>
+
+<pre class="code lang-python" data-lang="python" data-unlink="">username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ ls = <span class="synConstant">44</span>
+username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ ls
+<span class="synConstant">44</span>
+username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ <span class="synStatement">del</span> ls
+username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ ls
+...
+</pre>
+
+
+<h3 id="Subprocessとして">Subprocessとして</h3>
+
+<p><code>$()</code>でコマンドを実行すると、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>でSubprocessを使ったときのように、コマンドの戻り値が文字列型で返ってきます。</p>
+
+<pre class="code lang-python" data-lang="python" data-unlink="">username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ $(ls)
+hoge\nfuga\ndotfiles
+</pre>
+
+
+<p><code>$[]</code>という書き方でもSubprocessとして動作させられますが、直に標準出力に出力されるようで、戻り値としては<code>None</code>です。
+パイプなどで渡すとエラーとなりました。</p>
+
+<pre class="code lang-python" data-lang="python" data-unlink="">username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ $[ls]|less
+hoge
+fuga
+...
+xonsh: For full traceback <span class="synIdentifier">set</span>: $XONSH_SHOW_TRACEBACK = <span class="synIdentifier">True</span>
+<span class="synType">AttributeError</span>: <span class="synConstant">'NoneType'</span> <span class="synIdentifier">object</span> has no attribute <span class="synConstant">'splitlines'</span>
+username<span class="synPreProc">@</span><span class="synIdentifier">hostname</span> ~ $ $[ls] == <span class="synIdentifier">None</span>
+hoge
+fuga
+...
+<span class="synIdentifier">True</span>
+</pre>
+
+
+<h2 id="プロセス置換ができない">プロセス置換ができない？</h2>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/bash">bash</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a>で一時ファイルを作成するかわりに、プロセス置換で作業することが多いです。
+プロセス置換は<a class="keyword" href="http://d.hatena.ne.jp/keyword/bash">bash</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a>に搭載されている便利な機能の一つで、引数でファイルを指定するかわりにコマンドの実行結果をファイルとして扱える機能です。
+つまり中間ファイルが不要ということです。（どの中間ファイルを使ったか忘れがちですが、これだとコマンドの履歴として記録されます。）</p>
+
+<p>入力をプロセス置換するのは、だいたい2つ以上のファイルを利用するコマンドを使うときです。（ひとつのファイルなら基本的にはパイプで）
+diffを取る時やjoin、pasteなどで、以下のように使います。</p>
+
+<pre class="code lang-sh" data-lang="sh" data-unlink="">username@hostname ~ $ diff <span class="synStatement">&lt;</span><span class="synPreProc">(</span><span class="synStatement">sort</span><span class="synSpecial"> -nrk1 hoge.txt</span><span class="synPreProc">)</span> <span class="synStatement">&lt;</span><span class="synPreProc">(</span><span class="synStatement">sort</span><span class="synSpecial"> -nrk1 fuga.txt</span><span class="synPreProc">)</span>
+</pre>
+
+
+<p>Issueを<code>process substitution</code>で検索してみると、現時点（2017/12/10）で一番新しいものは<a href="https://github.com/xonsh/xonsh/issues/1307">Issue 1307</a>で、プロセス置換は使えないようです。
+<code>$(echo Hi Mom &gt; /tmp/mom)</code>が<code>/tmp/mom</code>を返すので、プロセス置換と似たことができると読めたのですが、v0.6.0では空文字列が返ってきました。</p>
+
+<p>詳しい人、教えてください。</p>
+
+<h2 id="使ってみて感想">使ってみて感想</h2>
+
+<p>シェルの設定ファイルを書かない人や、プロセス置換などを利用しない人にとっては、十分すぎる補完機能や<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%F3%A5%BF%A5%C3%A5%AF%A5%B9">シンタックス</a>ハイライトと感じました。</p>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a>から乗り換えるとなると、勝手が違うため覚えることが多いように思います。</p>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>言語が使えるという利点を活かす利用法を考えたいです。
+たぶん、<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>を使うかわりにうまく使えるのだと思います。</p>
+
+  
+</div>
+
+    
+  <footer class="entry-footer">
+    
+    <p class="entry-footer-section">
+  <span class="author vcard"><span class="fn" data-load-nickname="1" data-user-name="kanjirz50"><span class="user-name-nickname">かんちゃん</span> <span class="user-name-paren">(</span><span class="user-name-hatena-id">id:kanjirz50</span><span class="user-name-paren">)</span></span></span>
+  <span class="entry-footer-time"><a href="http://kanji.hatenablog.jp/entry/python-xonsh-try"><time data-relative="" datetime="2017-12-12T15:00:00Z" title="2017-12-12T15:00:00Z" pubdate="" class="updated">49日前</time></a></span>
+</p>
+
+    
+  <div class="hatena-star-container">
+  <span class="hatena-star-comment-container"><img src="./blog_files/comment.gif" tabindex="0" alt="Comments" title="Comments" class="hatena-star-comment-button" style="cursor: pointer; margin: 0px 3px; padding: 0px; border: none; vertical-align: middle; display: inline;"></span><span class="hatena-star-star-container"><img src="./blog_files/hatena-star-add-button.png" tabindex="0" alt="Add Star" title="Add Star" class="hatena-star-add-button" style="cursor: pointer; margin: 0px 3px; padding: 0px; border: none; vertical-align: middle;"></span></div>
+  <div class="hatena-star-metadata" style="display: none">
+    <a class="hatena-star-permalink" href="http://kanji.hatenablog.jp/entry/python-xonsh-try">Xonshを使ってみた</a>
+  </div>
+
+
+    
+<div class="social-buttons">
+  
+  
+    <div class="social-button-item">
+      <iframe class="hatena-bookmark-button-frame" title="この記事をはてなブックマークに追加" frameborder="0" scrolling="no" width="84" height="40" src="javascript:false" style="width: 84px; height: 40px;" src="./blog_files/saved_resource(4).html"></iframe>
+    </div>
+  
+  
+    <div class="social-button-item">
+      <div class="fb-share-button fb_iframe_widget" data-layout="box_count" data-href="http://kanji.hatenablog.jp/entry/python-xonsh-try" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=719729204785177&amp;container_width=0&amp;href=http%3A%2F%2Fkanji.hatenablog.jp%2Fentry%2Fpython-xonsh-try&amp;layout=box_count&amp;locale=ja_JP&amp;sdk=joey"><span style="vertical-align: bottom; width: 61px; height: 40px;"><iframe name="f114e2ae99b028" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:share_button Facebook Social Plugin" src="./blog_files/share_button.html" style="border: none; visibility: visible; width: 61px; height: 40px;" class=""></iframe></span></div>
+    </div>
+  
+  
+    <div class="social-button-item">
+      <iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="./blog_files/tweet_button.83d5793f6ebbe2046330abda6016ae93.ja.html" style="position: static; visibility: visible; width: 75px; height: 20px;" data-url="http://kanji.hatenablog.jp/entry/python-xonsh-try"></iframe>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+    
+  
+  
+    
+    <div class="google-afc-image test-google-rectangle-ads">
+      <script>
+  var hatenadfp = hatenadfp || {};
+  hatenadfp.adUnits = hatenadfp.adUnits || [];
+  hatenadfp.adUnits.push(
+    
+      
+      
+      { unitName: 'blog_user', size: [[300, 250], [336, 280], [468, 60], ["fluid"]], divId: 'google_afc_user_container_0', allowContentMatch: true }
+    
+  );
+  hatenadfp.isNGContent = false;
+  
+</script>
+
+      <div id="google_afc_user_container_0" class="google-afc-user-container  google_afc_blocklink2_5 google_afc_boder" data-google-query-id="CM_QuO2UgtkCFUObvAodJhIJeg"><div id="google_ads_iframe_/4374287/rectarectanglematch_cygames_attype_2_0__container__" style="border: 0pt none; display: inline-block; width: 300px; height: 250px;"><iframe frameborder="0" src="./blog_files/container.html" id="google_ads_iframe_/4374287/rectarectanglematch_cygames_attype_2_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" style="border: 0px; vertical-align: bottom;"></iframe></div></div>
+      
+        <a href="http://blog.hatena.ne.jp/guide/pro" class="open-pro-modal" data-guide-pro-modal-ad-url="http://hatenablog.com/guide/pro/modal/ad" style="visibility: visible;">広告を非表示にする</a>
+      
+      
+    </div>
+  
+
+
+    <div class="customized-footer">
+      
+
+        
+
+        
+
+          <div class="entry-footer-modules" id="entry-footer-secondary-modules">      
+<div class="hatena-module hatena-module-related-entries">
+      
+  <!-- Hatena-Epic-has-related-entries-with-elasticsearch:true -->
+  <div class="hatena-module-title">
+    関連記事
+  </div>
+  <div class="hatena-module-body">
+    <ul class="related-entries hatena-urllist urllist-with-thumbnails">
+  
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="http://kanji.hatenablog.jp/archive/2017/12/04" rel="nofollow">
+    <time pubdate="" datetime="2017-12-03T15:00:00Z" title="2017-12-03T15:00:00Z">
+      2017-12-04
+    </time>
+  </a>
+</div>
+
+          <a href="http://kanji.hatenablog.jp/entry/python-requests-beautifulsoup-encoding" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">Pythonのrequestsモジュールでの文字コード対策</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">【Webスクレイピング Advent Calendar 2017 4日目の記事です。…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="http://kanji.hatenablog.jp/archive/2017/12/01" rel="nofollow">
+    <time pubdate="" datetime="2017-11-30T15:00:00Z" title="2017-11-30T15:00:00Z">
+      2017-12-01
+    </time>
+  </a>
+</div>
+
+          <a href="http://kanji.hatenablog.jp/entry/python-hug-api-cli" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">hugでAPIやCLIを作る</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">【Sansan Advent Calendar 2017 1日目の記事です。】 Pythonで…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="http://kanji.hatenablog.jp/archive/2017/02/18" rel="nofollow">
+    <time pubdate="" datetime="2017-02-17T15:19:48Z" title="2017-02-17T15:19:48Z">
+      2017-02-18
+    </time>
+  </a>
+</div>
+
+          <a href="http://kanji.hatenablog.jp/entry/2017/02/18/001948" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">研究室の計算機管理者のススメ（２）OS</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">土台をつくろう！ 今回は計算機環境の土台作りということで、以…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="http://kanji.hatenablog.jp/archive/2016/11/04" rel="nofollow">
+    <time pubdate="" datetime="2016-11-04T05:23:00Z" title="2016-11-04T05:23:00Z">
+      2016-11-04
+    </time>
+  </a>
+</div>
+
+          <a href="http://kanji.hatenablog.jp/entry/zsh%E3%81%A7%E5%BC%95%E6%95%B0%E3%81%AB%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E7%B5%B6%E5%AF%BE%E3%83%91%E3%82%B9%E3%82%92%E5%8F%96%E5%BE%97" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">zshで引数に指定したファイルの絶対パスを取得</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">引数の相対パスを絶対パスに展開する「ls test.txt」みたいに相…</div>
+      </div>
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+  </div>
+        
+
+      
+    </div>
+    
+  <div class="comment-box">
+    
+    <ul class="comment">
+      <li class="read-more-comments" style="display: none;"><a>もっと読む</a></li>
+    </ul>
+    
+      <a class="leave-comment-title">コメントを書く</a>
+    
+  </div>
+
+  </footer>
+
+  </div>
+</article>
+
+      
+      
+    
+  
+
+  
+  <!-- rakuten_ad_target_end -->
+  <!-- google_ad_section_end -->
+  
+  
+  
+  <div class="pager pager-permalink permalink">
+    
+    
+      
+      <span class="pager-next">
+        <a href="http://kanji.hatenablog.jp/entry/python-requests-beautifulsoup-encoding" rel="next">
+          Pythonのrequestsモジュールでの文字コー…
+          <span class="pager-arrow"> »</span>
+        </a>
+      </span>
+    
+  </div>
+
+
+  
+
+
+
+        </div>
+      </div>
+
+      <aside id="box1">
+  <div id="box1-inner">
+  </div>
+</aside>
+
+    </div><!-- #wrapper -->
+
+    
+<aside id="box2">
+  
+  <div id="box2-inner">
+    
+      
+
+<div class="hatena-module hatena-module-profile">
+  <div class="hatena-module-title">
+    プロフィール
+  </div>
+  <div class="hatena-module-body">
+    
+    <a href="http://kanji.hatenablog.jp/about" class="profile-icon-link">
+      <img src="./blog_files/profile.png" alt="id:kanjirz50" class="profile-icon">
+    </a>
+    
+
+    
+    <span class="id">
+      <a href="http://kanji.hatenablog.jp/about" class="hatena-id-link"><span data-load-nickname="1" data-user-name="kanjirz50"><span class="user-name-nickname">かんちゃん</span> <span class="user-name-paren">(</span><span class="user-name-hatena-id">id:kanjirz50</span><span class="user-name-paren">)</span></span></a>
+      
+  
+    
+    
+  
+
+
+    </span>
+    
+
+    
+
+    
+    <div class="profile-description">
+      <p>プログラミングや言語処理、ガジェットなど個人の備忘録です。（メモ書き＋α）</p>
+
+    </div>
+    
+
+    
+      <div class="hatena-follow-button-box btn-subscribe js-hatena-follow-button-box">
+
+  <a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#" class="hatena-follow-button js-hatena-follow-button unsubscribing">
+    <span class="subscribing">
+      <span class="foreground">読者です</span>
+      <span class="background">読者をやめる</span>
+    </span>
+    <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once="">
+      <span class="foreground">読者になる</span>
+      <span class="background">読者になる</span>
+    </span>
+  </a>
+  <div class="subscription-count-box js-subscription-count-box" style="display: block;">
+    <i></i>
+    <u></u>
+    <span class="subscription-count js-subscription-count">6</span>
+  </div>
+</div>
+
+    
+
+    
+    <div class="hatena-follow-button-box btn-twitter">
+      <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" title="Twitter Follow Button" src="./blog_files/follow_button.83d5793f6ebbe2046330abda6016ae93.ja.html" style="position: static; visibility: visible; width: 167px; height: 20px;" data-screen-name="kanji250tr"></iframe>
+    </div>
+    
+
+    
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-search-box">
+  <div class="hatena-module-title">
+    検索
+  </div>
+  <div class="hatena-module-body">
+    <form class="search-form" role="search" action="http://kanji.hatenablog.jp/search" method="get">
+  <input type="text" name="q" class="search-module-input" value="" placeholder="記事を検索" required="" data-cip-id="cIPJQ342845639">
+  <input type="submit" value="検索" class="search-module-button">
+</form>
+
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-recent-entries ">
+  <div class="hatena-module-title">
+    <a href="http://kanji.hatenablog.jp/archive">
+      最新記事
+    </a>
+  </div>
+  <div class="hatena-module-body">
+    <ul class="recent-entries hatena-urllist ">
+  
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          <a href="http://kanji.hatenablog.jp/entry/python-xonsh-try" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">Xonshを使ってみた</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          <a href="http://kanji.hatenablog.jp/entry/python-requests-beautifulsoup-encoding" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">Pythonのrequestsモジュールでの文字コード対策</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          <a href="http://kanji.hatenablog.jp/entry/python-hug-api-cli" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">hugでAPIやCLIを作る</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          <a href="http://kanji.hatenablog.jp/entry/2017/11/19/213746" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">ICDAR2017に参加した</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          <a href="http://kanji.hatenablog.jp/entry/2017/06/02/lt-hackers-gate" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">Hacker's GATE LT大会に参加した</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+    
+      
+
+<div class="hatena-module hatena-module-archive" data-archive-type="default" data-archive-url="http://kanji.hatenablog.jp/archive">
+  <div class="hatena-module-title">
+    <a href="http://kanji.hatenablog.jp/archive">月別アーカイブ</a>
+  </div>
+  <div class="hatena-module-body">
+  
+
+  
+    
+    
+      <ul class="hatena-urllist">
+        
+          <li class="archive-module-year" data-year="2017">
+            <div class="archive-module-button">
+              <span class="archive-module-hide-button">▼</span>
+              <span class="archive-module-show-button">▶</span>
+            </div>
+            <a href="http://kanji.hatenablog.jp/archive/2017" class="archive-module-year-title">
+              2017 (11)
+            </a>
+            <ul class="archive-module-months">
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2017/12" class="archive-module-month-title">
+                    2017 / 12 (3)
+                  </a>
+                </li>
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2017/11" class="archive-module-month-title">
+                    2017 / 11 (1)
+                  </a>
+                </li>
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2017/6" class="archive-module-month-title">
+                    2017 / 6 (1)
+                  </a>
+                </li>
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2017/5" class="archive-module-month-title">
+                    2017 / 5 (2)
+                  </a>
+                </li>
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2017/2" class="archive-module-month-title">
+                    2017 / 2 (4)
+                  </a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          <li class="archive-module-year archive-module-year-hidden" data-year="2016">
+            <div class="archive-module-button">
+              <span class="archive-module-hide-button">▼</span>
+              <span class="archive-module-show-button">▶</span>
+            </div>
+            <a href="http://kanji.hatenablog.jp/archive/2016" class="archive-module-year-title">
+              2016 (12)
+            </a>
+            <ul class="archive-module-months">
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2016/11" class="archive-module-month-title">
+                    2016 / 11 (1)
+                  </a>
+                </li>
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2016/10" class="archive-module-month-title">
+                    2016 / 10 (8)
+                  </a>
+                </li>
+              
+                <li class="archive-module-month">
+                  <a href="http://kanji.hatenablog.jp/archive/2016/9" class="archive-module-month-title">
+                    2016 / 9 (3)
+                  </a>
+                </li>
+              
+            </ul>
+          </li>
+        
+      </ul>
+    
+  
+
+
+</div>
+</div>
+
+    
+      
+
+<div class="hatena-module hatena-module-category">
+  <div class="hatena-module-title">
+    カテゴリー
+  </div>
+  <div class="hatena-module-body">
+    <ul class="hatena-urllist">
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E8%A8%80%E8%AA%9E%E5%87%A6%E7%90%86">
+            言語処理 (4)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/Linux">
+            Linux (3)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/zsh">
+            zsh (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">
+            シェルスクリプト (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/Python">
+            Python (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE">
+            正規表現 (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E6%96%87%E6%9B%B8%E5%88%86%E9%A1%9E">
+            文書分類 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92">
+            機械学習 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E6%A9%9F%E6%A2%B0%E7%BF%BB%E8%A8%B3">
+            機械翻訳 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/NFS">
+            NFS (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/CentOS">
+            CentOS (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/CUDA">
+            CUDA (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/perl">
+            perl (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%83%BC">
+            セキュリティー (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://kanji.hatenablog.jp/archive/category/%E7%A0%94%E7%A9%B6">
+            研究 (1)
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+    
+    
+  </div>
+</aside>
+
+
+  </div>
+</div>
+
+
+
+
+        
+
+        
+  <script type="text/javascript" src="./blog_files/hatena_dfp2.js.ダウンロード"></script>
+
+
+        
+
+      </div>
+    </div>
+    
+<footer id="footer" data-brand="hatenablog">
+  <div id="footer-inner">
+    
+      <div style="display:none !important" class="guest-footer js-guide-register test-blogs-register-guide" data-action="guide-register">
+  <div class="guest-footer-content">
+    <h3>はてなブログをはじめよう！</h3>
+    <p>kanjirz50さんは、はてなブログを使っています。あなたもはてなブログをはじめてみませんか？</p>
+    <div class="guest-footer-btn-container">
+      <div class="guest-footer-btn">
+        <a class="btn btn-register" href="http://blog.hatena.ne.jp/register?via=200227" target="_blank">はてなブログをはじめる（無料）</a>
+      </div>
+      <div class="guest-footer-btn">
+        <a href="http://hatenablog.com/guide" target="_blank">はてなブログとは</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <address class="footer-address">
+      <a href="http://kanji.hatenablog.jp/">
+        <img src="./blog_files/https_%2F%2Fcdn.user.blog.st-hatena.com%2Fcustom_blog_icon%2F125871161%2F1514187551722936" width="16" height="16" alt="かんちゃんの備忘録">
+        <span class="footer-address-name">かんちゃんの備忘録</span>
+      </a>
+    </address>
+    <p class="services">
+      Powered by <a href="http://hatenablog.com/">Hatena Blog</a>
+      |
+        <a href="https://blog.hatena.ne.jp/-/abuse_report?target_url=http%3A%2F%2Fkanji.hatenablog.jp%2Fentry%2Fpython-xonsh-try" class="report-abuse-link test-report-abuse-link" target="_blank">ブログを報告する</a>
+    </p>
+  </div>
+</footer>
+
+
+    
+
+    
+  <script src="./blog_files/HatenaStar.js.ダウンロード"></script>
+
+
+    
+      <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./blog_files/lY4eZXm_YWu.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./blog_files/lY4eZXm_YWu(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=719729204785177&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    
+    
+
+<div class="quote-box" style="display: none;">
+  <div class="tooltip-quote tooltip-quote-star" style="display: block;">
+    <i class="blogicon-star" title="引用スターをつける"></i>
+  </div>
+  <div class="tooltip-quote tooltip-quote-stock" style="display: block;">
+    <i class="blogicon-quote" title="引用をストック"></i>
+  </div>
+  <div class="tooltip-quote tooltip-quote-tweet js-tooltip-quote-tweet">
+    <a class="js-tweet-quote" target="_blank" data-track-name="quote-tweet" data-track-once=""><i class="blogicon-twitter" title="引用してツイートする"></i></a>
+  </div>
+</div>
+
+<div class="message-box" id="quote-star-message-box" style="display: none; position: absolute;">
+  スターをつけました
+</div>
+
+<div class="quote-stock-panel" id="quote-stock-message-box" style="position: absolute; z-index: 3000">
+  <div class="message-box" id="quote-stock-succeeded-message" style="display: none">
+    <p>引用をストックしました</p>
+    <button class="btn btn-primary" id="quote-stock-show-editor-button" data-track-name="curation-quote-edit-button">ストック一覧を見る</button>
+    <button class="btn quote-stock-close-message-button">閉じる</button>
+  </div>
+
+  <div class="message-box" id="quote-login-required-message" style="display: none">
+    <p>引用するにはまずログインしてください</p>
+    <button class="btn btn-primary" id="quote-login-button">ログイン</button>
+    <button class="btn quote-stock-close-message-button">閉じる</button>
+  </div>
+
+  <div class="error-box" id="quote-stock-failed-message" style="display: none">
+    <p>引用をストックできませんでした。再度お試しください</p>
+    <button class="btn quote-stock-close-message-button">閉じる</button>
+  </div>
+
+  <div class="error-box" id="unstockable-quote-message-box" style="display: none; position: absolute; z-index: 3000;">
+    <p>限定公開記事のため引用できません。</p>
+  </div>
+</div>
+
+<script type="x-underscore-template" id="js-requote-button-template">
+  <div class="requote-button js-requote-button">
+    <button class="requote-button-btn tipsy-top" title="引用する"><i class="blogicon-quote"></i></button>
+  </div>
+</script>
+
+
+
+    
+    <div id="hidden-subscribe-button" style="display: none;">
+      <div class="hatena-follow-button-box btn-subscribe js-hatena-follow-button-box">
+
+  <a href="http://kanji.hatenablog.jp/entry/python-xonsh-try#" class="hatena-follow-button js-hatena-follow-button unsubscribing">
+    <span class="subscribing">
+      <span class="foreground">読者です</span>
+      <span class="background">読者をやめる</span>
+    </span>
+    <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once="">
+      <span class="foreground">読者になる</span>
+      <span class="background">読者になる</span>
+    </span>
+  </a>
+  <div class="subscription-count-box js-subscription-count-box" style="display: block;">
+    <i></i>
+    <u></u>
+    <span class="subscription-count js-subscription-count">6</span>
+  </div>
+</div>
+
+    </div>
+
+    
+  <script type="text/javascript" src="./blog_files/widgets.js.ダウンロード"></script>
+
+<script src="./blog_files/platform.js.ダウンロード" async="" defer="" gapi_processed="true">
+  { lang: 'ja', "parsetags": "explicit" }
+</script>
+<script type="text/javascript" src="./blog_files/bookmark_button.js.ダウンロード" charset="utf-8" async="async"></script>
+
+
+
+  <script type="text/javascript" src="./blog_files/react-with-addons.min.js.ダウンロード"></script>
+  <script type="text/javascript" src="./blog_files/react-dom.min.js.ダウンロード"></script>
+
+
+<script type="text/javascript" src="./blog_files/jquery.min.js.ダウンロード"></script>
+<script type="text/javascript" src="./blog_files/jquery-ui.1.10.0.custom.min.js.ダウンロード"></script>
+<script type="text/javascript" src="./blog_files/jquery.flot.js.ダウンロード"></script>
+<script type="text/javascript" src="./blog_files/jquery.flot.time.js.ダウンロード"></script>
+
+
+
+
+<script id="hatenablog-js" data-env="production" type="text/javascript" src="./blog_files/hatenablog.js.ダウンロード" crossorigin="anonymous"></script><div style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; display: none;"></div>
+<script type="text/javascript" src="./blog_files/texts-ja.js.ダウンロード"></script>
+
+
+  <script type="text/javascript">Hatena.Diary.GlobalHeader.init()</script>
+
+
+<script src="./blog_files/api.js.ダウンロード" async="" defer=""></script>
+
+
+
+
+    
+
+
+
+
+
+  
+
+
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="./blog_files/widget_iframe.83d5793f6ebbe2046330abda6016ae93.html" style="display: none;"></iframe><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button type="button" id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div><div style="top: -9999px; z-index: -9999;"></div><script type="text/javascript" charset="UTF-8">!function(t,e){if(void 0===e[t]){e[t]=function(){e[t].clients.push(this),this._init=[Array.prototype.slice.call(arguments)]},e[t].clients=[];for(var r=function(t){return function(){return this["_"+t]=this["_"+t]||[],this["_"+t].push(Array.prototype.slice.call(arguments)),this}},s=["addRecord","set","trackEvent","trackPageview","trackClicks","ready"],a=0;a<s.length;a++){var c=s[a];e[t].prototype[c]=r(c)}var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.treasuredata.com/sdk/1.7.2/td.min.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(n,i)}}("Treasure",this);</script><script type="text/javascript" charset="UTF-8" src="./blog_files/aid"></script><script type="text/javascript" charset="UTF-8">!function(t,e){if(void 0===e[t]){e[t]=function(){e[t].clients.push(this),this._init=[Array.prototype.slice.call(arguments)]},e[t].clients=[];for(var r=function(t){return function(){return this["_"+t]=this["_"+t]||[],this["_"+t].push(Array.prototype.slice.call(arguments)),this}},s=["addRecord","set","trackEvent","trackPageview","trackClicks","ready"],a=0;a<s.length;a++){var c=s[a];e[t].prototype[c]=r(c)}var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.treasuredata.com/sdk/1.7.2/td.min.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(n,i)}}("Treasure",this);</script><script type="text/javascript" charset="UTF-8" src="./blog_files/aid"></script><script type="text/javascript" charset="UTF-8">!function(t,e){if(void 0===e[t]){e[t]=function(){e[t].clients.push(this),this._init=[Array.prototype.slice.call(arguments)]},e[t].clients=[];for(var r=function(t){return function(){return this["_"+t]=this["_"+t]||[],this["_"+t].push(Array.prototype.slice.call(arguments)),this}},s=["addRecord","set","trackEvent","trackPageview","trackClicks","ready"],a=0;a<s.length;a++){var c=s[a];e[t].prototype[c]=r(c)}var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.treasuredata.com/sdk/1.7.2/td.min.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(n,i)}}("Treasure",this);</script><script type="text/javascript" charset="UTF-8" src="./blog_files/aid"></script><script type="text/javascript" charset="UTF-8">!function(t,e){if(void 0===e[t]){e[t]=function(){e[t].clients.push(this),this._init=[Array.prototype.slice.call(arguments)]},e[t].clients=[];for(var r=function(t){return function(){return this["_"+t]=this["_"+t]||[],this["_"+t].push(Array.prototype.slice.call(arguments)),this}},s=["addRecord","set","trackEvent","trackPageview","trackClicks","ready"],a=0;a<s.length;a++){var c=s[a];e[t].prototype[c]=r(c)}var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.treasuredata.com/sdk/1.7.2/td.min.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(n,i)}}("Treasure",this);</script><script type="text/javascript" charset="UTF-8" src="./blog_files/aid"></script><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./blog_files/saved_resource(5).html"></iframe><iframe id="google_osd_static_frame_9977886185948" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./blog_files/saved_resource(6).html"></iframe><img src="./blog_files/dmp" width="1" height="1" border="0" style="display: none;"><img src="./blog_files/pixel" width="1" height="1" border="0" style="display: none;"><img src="./blog_files/adsct" width="1" height="1" border="0" style="display: none;"><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P5GX4M');</script><iframe src="./blog_files/pd.html" width="0" height="0" style="display:none;"></iframe><div style="display: none; visibility: hidden;"><script type="text/javascript">!function(c,d,b,f){if(!d[c]){d[c]=function(){d[c].instances.push(this);this.init&&this.init()};d[c].instances=[];for(var a=0,e=["td_send","td_send_imid"];a<e.length;a++)d[c].prototype[e[a]]=function(a){return function(){this["tmp_"+a]=this["tmp_"+a]||[];this["tmp_"+a].push(Array.prototype.slice.call(arguments))}}(e[a]);a=b.getElementsByTagName(f)[0];b=b.createElement(f);b.async=!0;b.src="//cf.im-apps.net/sdk/tdim-0.11.2.js";a.parentNode.insertBefore(b,a)}}("TDIM",window,document,"script");var t=new TDIM;
+t.td_api_key="312/b4f0042d7c26b4f44d2561bbb5c396349b54b10e";t.td_db="cosmi_8045";t.im_api_token="omO0CDJd98sxiIkb8Mzm7Q";t.gtm_dl="dataLayer";t.td_send_imid("pageviews");</script></div><div style="display: none; visibility: hidden;">
+<script src="./blog_files/oct.js.ダウンロード" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid("nudt9",{tw_sale_amount:0,tw_order_quantity:0});</script>
+<noscript></noscript>
+</div><div style="display: none; visibility: hidden;">
+<script src="./blog_files/oct.js.ダウンロード" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid("nv3b2",{tw_sale_amount:0,tw_order_quantity:0});</script>
+<noscript></noscript>
+</div><div style="display: none; visibility: hidden;"><script type="text/javascript">var _fout_queue=_fout_queue||{};void 0===_fout_queue.segment&&(_fout_queue.segment={});void 0===_fout_queue.segment.queue&&(_fout_queue.segment.queue=[]);_fout_queue.segment.queue.push({user_id:10595,advertiser_id:1808,contractor_id:5});(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://":"http://")+"js.fout.jp/segmentation.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script>
+    </div><div style="display: none; visibility: hidden;">
+<script>!function(d,e,f,a,b,c){d.twq||(a=d.twq=function(){a.exe?a.exe.apply(a,arguments):a.queue.push(arguments)},a.version="1.1",a.queue=[],b=e.createElement(f),b.async=!0,b.src="//static.ads-twitter.com/uwt.js",c=e.getElementsByTagName(f)[0],c.parentNode.insertBefore(b,c))}(window,document,"script");twq("init","ny5vy");twq("track","PageView");</script>
+</div><div style="display: none; visibility: hidden;">
+<script>!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1733466696949178");fbq("track","PageView");</script>
+<noscript></noscript>
+
+
+</div><script src="./blog_files/adsct(1)" type="text/javascript"></script><script src="./blog_files/adsct(2)" type="text/javascript"></script><iframe src="./blog_files/beacon.html" style="display: none;"></iframe><script src="./blog_files/adsct(3)" type="text/javascript"></script></body></html>
