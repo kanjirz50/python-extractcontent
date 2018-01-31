@@ -12,7 +12,7 @@ ExtractContent3はPython3で動作する、HTMLから本文を抽出するモジ
 Usage
 ------------
 
-.. code-bloc:: python
+.. code-block:: python
 
    import extractcontent
    extractor = extractcontent.ExtractContent()
@@ -37,7 +37,7 @@ Installation
 Option
 -------------
 
-.. code-block::python
+.. code-block:: python
 
    """
    オプションの種類:
