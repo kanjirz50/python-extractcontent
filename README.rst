@@ -17,8 +17,8 @@ Usage
 
 .. code-block:: python
 
-   import extractcontent
-   extractor = extractcontent.ExtractContent()
+   from extractcontent3 import ExtractContent
+   extractor = ExtractContent()
 
    # オプション値を指定する
    opt = {"threshold":50}
