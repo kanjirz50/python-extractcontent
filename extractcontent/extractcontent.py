@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-# -*- encoding:utf-8 -*-
+
 import re
 import unicodedata
+from functools import reduce
 
 
 class ExtractContent(object):
@@ -12,8 +13,8 @@ class ExtractContent(object):
         "lt": "<",
         "gt": "<",
         "amp": "&",
-        "laquo": '\x00\xc2\xab',  # u"\x00\xab".encode("utf-8")
-        "raquo": '\x00\xc2\xbb',  # u"\x00\xbb".encode("utf-8")
+        "laquo": "\x00\xab",
+        "raquo": "\x00\xbb",
     }
 
     # Default option parameters.
@@ -29,8 +30,8 @@ class ExtractContent(object):
         # ( the larger, the harder to continue )
         "punctuation_weight": 10,
         # score weight for punctuations
-        "punctuations": (r"(?is)(\343\200[\201\202]|\357\274"
-                         r"[\201\214\216\237]|\.[^A-Za-z0-9]|,[^0-9]|!|\?)"),
+        "punctuations": (r"(?is)([\u3001\u3002\uff01\uff0c\uff0e\uff1f]"
+                         r"|\.[^A-Za-z0-9]|,[^0-9]|!|\?)"),
         # punctuation characters
         "waste_expressions": r"(?i)Copyright|All Rights Reserved",
         # characteristic keywords including footer
@@ -175,11 +176,7 @@ class ExtractContent(object):
     # Eliminates useless tags
     def _eliminate_useless_tags(self, html):
         # Eliminate useless symbols
-        html = html.encode('utf-8')
-        html = re.sub((r"\342(?:\200[\230-\235]|\206[\220-\223]|"
-                       r"\226[\240-\275]|\227[\206-\257]|\230[\205\206])"),
-                "", html)
-        html = html.decode('utf-8')
+        html = re.sub(r"[\u2018-\u201d\u2190-\u2193\u25a0-\u25bd\u25c6-\u25ef\u2605-\u2606]", "", html)
         # Eliminate useless html tags
         html = \
             re.sub(r"(?is)<(script|style|select|noscript)[^>]*>.*?</\1\s*>",
@@ -240,11 +237,9 @@ class ExtractContent(object):
         # Convert from wide character to ascii
         if st and type(st) != str:
             st = unicodedata.normalize("NFKC", st)
-            st = st.encode('utf-8')
-        st = re.sub(r'\342[\224\225][\200-\277]', '', st)  # keisen
+        st = re.sub(r"[\u2500-\u253f\u2540-\u257f]", "", st)  # 罫線(keisen)
         st = re.sub(r"&(.*?);", lambda x: self.CHARREF.get(x.group(1),
-            x.group()), st)
-        st = st.decode('utf-8')
+             x.group()), st)
         st = re.sub(r"[ \t]+", " ", st)
         st = re.sub(r"\n\s*", "\n", st)
         return st
