@@ -1,14 +1,19 @@
-===============
-ExtractContent
+ExtractContent3
 ===============
 
-ExtractContentはHTMLから本文を抽出するモジュールです。
-このモジュールは同名のRubyモジュールをPython用に書き直したものです。
+.. image:: https://img.shields.io/badge/License-BSD%202--Clause-orange.svg
+   :target: https://opensource.org/licenses/BSD-2-Clause
+
+.. image:: https://img.shields.io/badge/python-3.6-blue.svg
+	    
+ExtractContent3はPython3で動作する、HTMLから本文を抽出するモジュールです。
+このモジュールは、ExtractContent RubyモジュールをPython用に書き直したpython-extracontentを改造したものです。
 
 Usage
-================
+------------
 
-::
+.. code-bloc:: python
+
    import extractcontent
    extractor = extractcontent.ExtractContent()
 
@@ -22,6 +27,17 @@ Usage
    html, title = extractor.as_html()
    title = extractor.extract_title(html)
 
+Installation
+------------
+
+.. code-block:: bash
+
+   $ pip install git+https://github.com/kanjirz50/python-extractcontent3
+
+Option
+-------------
+
+.. code-block::python
 
    """
    オプションの種類:
@@ -44,8 +60,8 @@ Usage
    punctuation_weight / 10
    句読点に対するスコア　
    大きいほど句読点が存在するブロックを本文と判定しやすくなる
-    
-   punctuations / r"(?is)(\343\200[\201\202]|\357\274[\201\214\216\237]|\.[^A-Za-z0-9]|,[^0-9]|!|\?)"
+
+   punctuations r"(?is)([\u3001\u3002\uff01\uff0c\uff0e\uff1f]|\.[^A-Za-z0-9]|,[^0-9]|!|\?)"    
    句読点を抽出する正規表現
     
    waste_expressions / r"(?i)Copyright|All Rights Reserved"
@@ -54,10 +70,10 @@ Usage
    debug / False
     Trueの場合、ブロック情報を出力
    """
-   
+
+謝辞
 ----
 
-謝辞：
 オリジナル版の作成者やForkで改良を加えた方々に感謝します。
 
 - Copyright of the original implementation:: (c)2007/2008/2009 Nakatani Shuyo / Cybozu labs Inc. All rights reserved
