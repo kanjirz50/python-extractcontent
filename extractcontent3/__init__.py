@@ -1,1 +1,1 @@
-from .extractcontent import ExtractContent
+from .extractcontent3 import ExtractContent

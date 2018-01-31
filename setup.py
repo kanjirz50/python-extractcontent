@@ -8,10 +8,14 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="extractcontent",
+    name="extractcontent3",
     version="0.0.1",
     description="",
     long_description=long_description,
+    license="BSD",
     url="https://github.com/kanjirz50/python-extractcontent",
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
+    install_requires=[],
+    dependency_links=[],
+    python_requires='~=3.3',
 )
