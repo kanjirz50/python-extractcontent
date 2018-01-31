@@ -8,7 +8,7 @@ ExtractContentはHTMLから本文を抽出するモジュールです。
 Usage
 ================
 
-::
+.. code-block:: python
    import extractcontent
    extractor = extractcontent.ExtractContent()
 
