@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-# -*- encoding:utf-8 -*-
+
 import re
 import unicodedata
+from functools import reduce
 
 
 class ExtractContent(object):
@@ -12,8 +13,8 @@ class ExtractContent(object):
         "lt": "<",
         "gt": "<",
         "amp": "&",
-        "laquo": '\x00\xc2\xab',  # u"\x00\xab".encode("utf-8")
-        "raquo": '\x00\xc2\xbb',  # u"\x00\xbb".encode("utf-8")
+        "laquo": "\x00\xab",
+        "raquo": "\x00\xbb",
     }
 
     # Default option parameters.
@@ -29,8 +30,8 @@ class ExtractContent(object):
         # ( the larger, the harder to continue )
         "punctuation_weight": 10,
         # score weight for punctuations
-        "punctuations": (r"(?is)(\343\200[\201\202]|\357\274"
-                         r"[\201\214\216\237]|\.[^A-Za-z0-9]|,[^0-9]|!|\?)"),
+        "punctuations": (r"(?is)([\u3001\u3002\uff01\uff0c\uff0e\uff1f]"
+                         r"|\.[^A-Za-z0-9]|,[^0-9]|!|\?)"),
         # punctuation characters
         "waste_expressions": r"(?i)Copyright|All Rights Reserved",
         # characteristic keywords including footer
@@ -44,13 +45,17 @@ class ExtractContent(object):
         self.title = ''
         self.body = ''
 
-    # Sets option parameters to default.
-    # Parameter opt is given as Dictionary.
     def set_option(self, opt):
+        """
+        Sets option parameters to default.
+        Parameter opt is given as Dictionary.
+        """
         self.option.update(opt)
 
-    # Analyses the given HTML text, extracts body and title.
     def analyse(self, html, opt=None):
+        """
+        Analyses the given HTML text, extracts body and title.
+        """
         # flameset or redirect
         if re.search((r"(?i)<\/frameset>|<meta\s+http-equiv\s*=\s*"
                       r"[\"']?refresh['\"]?[^>]*url"), html) is not None:
@@ -71,11 +76,12 @@ class ExtractContent(object):
         # Google AdSense Section Target
         html = re.sub((r"(?is)<!--\s*google_ad_section_start\(weight="
                        r"ignore\)\s*-->.*?<!--\s*google_ad_section_end.*?-->"),
-                "", html)
+                      "", html)
         if re.search(r"(?is)<!--\s*google_ad_section_start[^>]*-->",
-                html) is not None:
+                     html) is not None:
             result = re.findall((r"(?is)<!--\s*google_ad_section_start"
-                                 r"[^>]*-->.*?<!--\s*google_ad_section_end.*?-->"), html)
+                                 r"[^>]*-->.*?<!--\s*google_ad_section_end.*?-->"),
+                                html)
             html = "\n".join(result)
 
         # eliminate useless text
@@ -84,7 +90,7 @@ class ExtractContent(object):
         # heading tags including title
         # self.title = title
         html = re.sub(r"(?s)(<h\d\s*>\s*(.*?)\s*</h\d\s*>)",
-                self._estimate_title, html)
+                      self._estimate_title, html)
 
         # extract text blocks
         factor = 1.0
@@ -106,19 +112,15 @@ class ExtractContent(object):
                 continue
 
             # calculate score of block
-            c = (len(notlinked) + self._count_pattern(notlinked,
-                self.option["punctuations"]) * self.option["punctuation_weight"]) * factor
+            c = (len(notlinked) + self._count_pattern(notlinked, self.option["punctuations"]) * self.option["punctuation_weight"]) * factor
             factor *= self.option["decay_factor"]
-            not_body_rate = self._count_pattern(block,
-                self.option["waste_expressions"]) + self._count_pattern(block,
-                        r"amazon[a-z0-9\.\/\-\?&]+-22") / 2.0
+            not_body_rate = self._count_pattern(block, self.option["waste_expressions"]) + self._count_pattern(block, r"amazon[a-z0-9\.\/\-\?&]+-22") / 2.0
             if not_body_rate > 0:
                 c *= (0.72 ** not_body_rate)
             c1 = c * continuous
             if self.option["debug"]:
-                print("----- %f*%f=%f %d \n%s" %\
-                    (c, continuous, c1, len(notlinked),
-                            self._strip_tags(block)[0:100]))
+                print("----- %f*%f=%f %d \n%s" % (c, continuous, c1, len(notlinked),
+                                                  self._strip_tags(block)[0:100]))
 
             # tread continuous blocks as cluster
             if c1 > self.option["threshold"]:
@@ -142,7 +144,6 @@ class ExtractContent(object):
     def as_text(self):
         return (self._strip_tags(self.body), self.title)
 
-    # Extract title.
     def extract_title(self, st):
         result = re.search(r"(?s)<title[^>]*>\s*(.*?)\s*</title\s*>", st)
         if result is not None:
@@ -164,26 +165,26 @@ class ExtractContent(object):
         else:
             return len(result.span())
 
-    # h? タグの記述がタイトルと同じかどうか調べる
     def _estimate_title(self, match):
+        """
+        h? タグの記述がタイトルと同じかどうか調べる
+        """
         striped = self._strip_tags(match.group(2))
         if len(striped) >= 3 and self.title.find(striped) != -1:
             return "<div>%s</div>" % (striped)
         else:
             return match.group(1)
 
-    # Eliminates useless tags
     def _eliminate_useless_tags(self, html):
+        """
+        Eliminates useless tags
+        """
         # Eliminate useless symbols
-        html = html.encode('utf-8')
-        html = re.sub((r"\342(?:\200[\230-\235]|\206[\220-\223]|"
-                       r"\226[\240-\275]|\227[\206-\257]|\230[\205\206])"),
-                "", html)
-        html = html.decode('utf-8')
+        html = re.sub(r"[\u2018-\u201d\u2190-\u2193\u25a0-\u25bd\u25c6-\u25ef\u2605-\u2606]", "", html)
         # Eliminate useless html tags
         html = \
             re.sub(r"(?is)<(script|style|select|noscript)[^>]*>.*?</\1\s*>",
-                "", html)
+                   "", html)
         html = re.sub(r"(?s)<!--.*?-->", "", html)
         html = re.sub(r"<![A-Za-z].*?>/s", "", html)
         html = re.sub((r"(?s)<div\s[^>]*class\s*=\s*['\"]?alpslab-slide"
@@ -192,15 +193,19 @@ class ExtractContent(object):
                        r"?\S*more\S*[\"']?[^>]*>"), "", html)
         return html
 
-    # Checks if the given block has only tags without text.
     def _has_only_tags(self, st):
+        """
+        Checks if the given block has only tags without text.
+        """
         st = re.sub(r"(?is)<[^>]*>", "", st)
         st = re.sub(r"&nbsp;", "", st)
         st = st.strip()
         return len(st) == 0
 
-    # eliminate link tags
     def _eliminate_link(self, html):
+        """
+        eliminate link tags
+        """
         count = 0
         notlinked, count = re.subn(r"(?is)<a\s[^>]*>.*?<\/a\s*>", "", html)
         notlinked = re.sub(r"(?is)<form\s[^>]*>.*?</form\s*>", "", notlinked)
@@ -210,8 +215,10 @@ class ExtractContent(object):
             return ""
         return notlinked
 
-    # determines whether a block is link list or not
     def _islinklist(self, st):
+        """
+        determines whether a block is link list or not
+        """
         result = re.search(r"(?is)<(?:ul|dl|ol)(.+?)</(?:ul|dl|ol)>", st)
         if result is not None:
             listpart = result.group(1)
@@ -223,8 +230,10 @@ class ExtractContent(object):
             return len(outside) <= len(st) / (45 / rate)
         return False
 
-    # estimates how much degree of link list
     def _evaluate_list(self, list):
+        """
+        estimates how much degree of link list
+        """
         if len(list) == 0:
             return 1
         hit = 0
@@ -234,17 +243,17 @@ class ExtractContent(object):
                 hit += 1
         return 9 * (1.0 * hit / len(list)) ** 2 + 1
 
-    # Strips tags from html.
     def _strip_tags(self, html):
+        """
+        Strips tags from html.
+        """
         st = re.sub(r"(?s)<.+?>", "", html)
         # Convert from wide character to ascii
         if st and type(st) != str:
             st = unicodedata.normalize("NFKC", st)
-            st = st.encode('utf-8')
-        st = re.sub(r'\342[\224\225][\200-\277]', '', st)  # keisen
+        st = re.sub(r"[\u2500-\u253f\u2540-\u257f]", "", st)  # 罫線(keisen)
         st = re.sub(r"&(.*?);", lambda x: self.CHARREF.get(x.group(1),
-            x.group()), st)
-        st = st.decode('utf-8')
+                                                           x.group()), st)
         st = re.sub(r"[ \t]+", " ", st)
         st = re.sub(r"\n\s*", "\n", st)
         return st
