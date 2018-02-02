@@ -1,5 +1,5 @@
 language: python
-pytyhon:
+python:
   - "3.6"
   - "nightly"
 script:

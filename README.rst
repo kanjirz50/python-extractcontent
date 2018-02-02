@@ -5,6 +5,9 @@ ExtractContent3
    :target: https://opensource.org/licenses/BSD-2-Clause
 
 .. image:: https://img.shields.io/badge/python-3.6-blue.svg
+
+.. image:: https://travis-ci.org/kanjirz50/python-extractcontent3.svg?branch=master
+    :target: https://travis-ci.org/kanjirz50/python-extractcontent3
 	    
 ExtractContent3はPython3で動作する、HTMLから本文を抽出するモジュールです。
 このモジュールは、ExtractContent RubyモジュールをPython用に書き直したpython-extracontentを改造したものです。
@@ -14,8 +17,8 @@ Usage
 
 .. code-block:: python
 
-   import extractcontent
-   extractor = extractcontent.ExtractContent()
+   from extractcontent3 import ExtractContent
+   extractor = ExtractContent()
 
    # オプション値を指定する
    opt = {"threshold":50}
