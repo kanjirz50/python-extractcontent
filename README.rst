@@ -31,7 +31,10 @@ Installation
 ------------
 
 .. code-block:: bash
-
+   # pypi
+   $ pip install extractcontent3
+   
+   # Githubからのインストール
    $ pip install git+https://github.com/kanjirz50/python-extractcontent3
 
 Option
