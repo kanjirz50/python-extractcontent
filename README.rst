@@ -1,14 +1,18 @@
 ExtractContent3
 ===============
 
-.. image:: https://img.shields.io/badge/License-BSD%202--Clause-orange.svg
-   :target: https://opensource.org/licenses/BSD-2-Clause
+.. image:: https://img.shields.io/pypi/v/extractcontent3.svg
+    :target: https://pypi.python.org/pypi/extractcontent3
 
-.. image:: https://img.shields.io/badge/python-3.6-blue.svg
+.. image:: https://img.shields.io/pypi/l/extractcontent3.svg
+    :target: https://pypi.python.org/pypi/extractcontent3
+
+.. image:: https://img.shields.io/pypi/pyversions/extractcontent3.svg
+    :target: https://pypi.python.org/pypi/extractcontent3
 
 .. image:: https://travis-ci.org/kanjirz50/python-extractcontent3.svg?branch=master
     :target: https://travis-ci.org/kanjirz50/python-extractcontent3
-	    
+
 ExtractContent3はPython3で動作する、HTMLから本文を抽出するモジュールです。
 このモジュールは、ExtractContent RubyモジュールをPython用に書き直したpython-extracontentを改造したものです。
 
@@ -34,6 +38,7 @@ Installation
 ------------
 
 .. code-block:: bash
+
    # pypi
    $ pip install extractcontent3
    
@@ -87,7 +92,3 @@ Option
   - http://labs.cybozu.co.jp/blog/nakatani/2007/09/web_1.html
 - https://github.com/petitviolet/python-extractcontent
 - https://github.com/yono/python-extractcontent
-  
-    
-
-
