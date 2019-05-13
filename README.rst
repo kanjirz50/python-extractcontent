@@ -26,7 +26,7 @@ Usage
 
    # オプション値を指定する
    opt = {"threshold":50}
-   extractor.set_default(opt)
+   extractor.set_option(opt)
 
    html = open("index.html").read() # 解析対象HTML
    extractor.analyse(html)
